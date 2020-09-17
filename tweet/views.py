@@ -30,3 +30,9 @@ class MyTweetDeleteView(generics.DestroyAPIView):
 		return queryset
 
 
+class AllTweetView(generics.ListAPIView):
+	serializer_class = MyTweetSerializer
+	queryset=Tweet.objects.all()
+	# authentication_classes =[TokenAuthentication,]
+	# permission_classes = [IsAuthenticated]
+	renderer_classes = [JSONRenderer]

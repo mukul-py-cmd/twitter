@@ -39,3 +39,31 @@ headers{
 }
 https://twitter-clone-mukul.herokuapp.com/mytweet/delete/<int:id>/
 id = Tweet id
+
+
+
+Get all tweets[GET]
+#No token needed
+https://twitter-clone-mukul.herokuapp.com/alltweets/
+[
+    {
+        "id": 1,
+        "content": "my name is",
+        "likes": 4,
+        "updation_date": "2020-09-14T15:35:43.301382Z",
+        "user": {
+            "id": 10,
+            "username": "pablo"
+        }
+    },
+    {
+        "id": 2,
+        "content": "my name is pablo",
+        "likes": 7,
+        "updation_date": "2020-09-15T04:33:04.130059Z",
+        "user": {
+            "id": 10,
+            "username": "pablo"
+        }
+    },
+]
