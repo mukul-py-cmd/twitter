@@ -20,9 +20,7 @@ class MyTweetSerializer(serializers.ModelSerializer):
 		# read_only_fields = ['updation_date','user']
 		# depth = 1
 
-	def create(self, validated_data):
-		print(validated_data) 
-		validated_data['user'] = self.context.get('request').user
-		print(validated_data) 
+	def create(self, validated_data): 
+		validated_data['user'] = self.context.get('request').user 
 		return super().create(validated_data)
 

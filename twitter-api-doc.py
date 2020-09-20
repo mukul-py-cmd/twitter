@@ -33,6 +33,24 @@ response
     }
 ]
 
+
+update my tweet[PUT]
+headers{
+    "Authorization":"Token 0b26247231851c198b59fd6a5a13b5ae2ac20e61"
+}
+https://twitter-clone-mukul.herokuapp.com/mytweet/delete/<int:id>/
+id = Tweet id
+
+request
+{
+    "content":"I am batman!@",
+    "likes":"484"
+}
+
+
+
+
+
 delete my tweet[DELETE]
 headers{
     "Authorization":"Token 0b26247231851c198b59fd6a5a13b5ae2ac20e61"

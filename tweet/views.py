@@ -29,6 +29,17 @@ class MyTweetDeleteView(generics.DestroyAPIView):
 		queryset = Tweet.objects.all()
 		return queryset
 
+class MyTweetUpdateView(generics.UpdateAPIView):
+	authentication_classes =[TokenAuthentication,]
+	permission_classes = [IsAuthenticated,IsTweetAuthor]
+	serializer_class = MyTweetSerializer
+	lookup_field="id"
+
+	def get_queryset(self):
+		queryset = Tweet.objects.all()
+		return queryset
+
+
 
 class AllTweetView(generics.ListAPIView):
 	serializer_class = MyTweetSerializer
