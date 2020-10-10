@@ -14,10 +14,12 @@ class UserSerializer(serializers.ModelSerializer):
 #what is **validated (**??)
 class MyTweetSerializer(serializers.ModelSerializer):
 	user = UserSerializer(required=False)
+	# image = serializers.CharField(source='user.profile.image',required=False,default ='https://twitter-django-media.s3.amazonaws.com/default.jpg')
+	profile_image = serializers.ImageField(source='user.profile.image',required=False)
 	class Meta:
 		model = Tweet
-		fields = ['id','content','likes','updation_date','user']
-		# read_only_fields = ['updation_date','user']
+		fields = ['id','content','likes','updation_date','user','profile_image','image']
+		read_only_fields = ['profile_image',]
 		# depth = 1
 
 	def create(self, validated_data): 

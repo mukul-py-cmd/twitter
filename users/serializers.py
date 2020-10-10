@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-
+from .models import Profile
 
 class UserSerializer(serializers.ModelSerializer):
 	class Meta:
@@ -19,4 +19,18 @@ class UserSerializer(serializers.ModelSerializer):
 		instance.save()
 		return instance
 
+class UserProfile(serializers.ModelSerializer):
+	class Meta:
+		model =User
+		fields = ['first_name','last_name','username','email']
+
+
+class ProfileSerializer(serializers.ModelSerializer):
+	user = UserProfile(read_only =True)
+
+	class Meta:
+		model =Profile
+		fields = ['user','image','followers','following','bio']
+		read_only_fields = ['followers','following']
+		# extra_kwargs = {'image': {'write_only': True}}
 
