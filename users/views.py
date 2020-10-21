@@ -7,6 +7,7 @@ from .models import Profile
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import BasePermission, IsAuthenticated
 from .permissions import ReadOnly,IsProfileOwner
+from django.http import Http404
 # from rest_framework import status
 
 class RegisterUser(generics.CreateAPIView):
@@ -21,12 +22,31 @@ class RegisterUser(generics.CreateAPIView):
 
 
 
-class Profile(generics.RetrieveUpdateAPIView):
+class Profile_view(generics.RetrieveUpdateAPIView):
 	serializer_class = ProfileSerializer
-	queryset=Profile.objects.all()
-	lookup_field="user_id"
-	lookup_url_kwarg ="id"
+	# lookup_field="user_id"
+	lookup_url_kwarg ="username"
 	authentication_classes =[TokenAuthentication,]
 	permission_classes = [IsAuthenticated|ReadOnly,IsProfileOwner|ReadOnly]
+
+	def get_queryset(self):
+		username = self.kwargs[self.lookup_url_kwarg]
+		try:
+			user_obj = User.objects.get(username=username)
+		except User.DoesNotExist:
+		    raise Http404("No user found")
+
+		user_id = user_obj.id
+		queryset = Profile.objects.filter(user_id=user_id)
+		return queryset
+
+	def get_object(self):
+		queryset = self.filter_queryset(self.get_queryset())
+		obj = queryset[0]
+
+		# May raise a permission denied
+		self.check_object_permissions(self.request, obj)
+
+		return obj
 
 

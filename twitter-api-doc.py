@@ -143,7 +143,7 @@ response
 
 
 Get Profile[GET]
-https://twitter-clone-mukul.herokuapp.com/users/profile/:userid/
+https://twitter-clone-mukul.herokuapp.com/users/profile/:username/
 No token needed
 {
     "user": {
@@ -159,7 +159,7 @@ No token needed
 }
 
 Update Profile[PUT]
-https://twitter-clone-mukul.herokuapp.com/users/profile/:userid/
+https://twitter-clone-mukul.herokuapp.com/users/profile/:username/
 headers{
     "Authorization":"Token 0b26247231851c198b59fd6a5a13b5ae2ac20e61"
 }
